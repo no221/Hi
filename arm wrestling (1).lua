@@ -1858,46 +1858,7 @@ task.spawn(function()
     end
 end)
 
-local plr = game:GetService("Players").LocalPlayer
-local questString = plr.PlayerGui.GameUI.Menus.QuestTokens.RandomQuestString
-local questAmount = plr.PlayerGui.GameUI.Menus.QuestTokens.Battles.TextLabel
 
-local function Train(quest)
-    local questLower = quest:lower()
-    if questLower:find("knuckle") then
-        CheckPunch()
-    elseif questLower:find("dumbell") then
-        CheckDumbells()
-    elseif questLower:find("grip") then
-        CheckGrips()
-    elseif questLower:find("barbell") then
-        CheckBarbells()
-    end
-end
-
-local loop = false
-Section:CreateToggle("Auto Quest", function(state)
-    loop = state    
-    if state then
-        task.spawn(function()
-            while loop do
-                if questString.Text ~= "" and questAmount.Text ~= "" then
-                    local current, max = questAmount.Text:match("(%d+)/(%d+)")
-                    current, max = tonumber(current), tonumber(max)
-
-                    if current and max then
-                        if current >= max then
-                            repeat task.wait() until questAmount.Text:find("0/")
-                        else
-                            Train(questString.Text)
-                        end
-                    end
-                end
-                task.wait()
-            end
-        end)
-    end
-end, "auto Quest")
 -- Auto Super Rebirth
 Section:CreateToggle("Auto Super Rebirth", function(bool)
     getgenv().autoSuperRebirth = bool
