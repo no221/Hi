@@ -1875,31 +1875,29 @@ local function Train(quest)
     end
 end
 
-local loop
-local toggle = Section:CreateToggle("Auto Quest", function(state)
+local loop = false
+Section:CreateToggle("Auto Quest", function(state)
+    loop = state    
     if state then
-        loop = task.spawn(function()
-            while task.wait() do
+        task.spawn(function()
+            while loop do
                 if questString.Text ~= "" and questAmount.Text ~= "" then
                     local current, max = questAmount.Text:match("(%d+)/(%d+)")
                     current, max = tonumber(current), tonumber(max)
 
                     if current and max then
                         if current >= max then
-                            repeat task.wait() until questAmount.Text:find("0/") -- Tunggu sampai balik ke 0
+                            repeat task.wait() until questAmount.Text:find("0/")
                         else
                             Train(questString.Text)
                         end
                     end
                 end
+                task.wait()
             end
         end)
-    else
-        if loop then
-            task.cancel(loop)
-        end
     end
-end, "Auto finish token quest")
+end, "auto Quest")
 -- Auto Super Rebirth
 Section:CreateToggle("Auto Super Rebirth", function(bool)
     getgenv().autoSuperRebirth = bool
