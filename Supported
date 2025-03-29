@@ -1,1 +1,35 @@
 print("\nTested & working on:\nUltra hatching simulator X\nClick game X\nPet hatching simulator 99\nClickers Adventure\nClicker adventure\nSecret Tappers\nMysterious Hatchers X\nClicker legends\nTapping Master\nMega Hatchers X\nUltimate tappers\npet tappers\nPet hatchers X\ntapping gods\nGodly tappers 99\nslushy tappers\ntapping mayhem\negg tappers\nWWII Tycoon\nUndead-Rising-Tycoon\nProtect the house\nprison mining simulator\npyro playground\ninfections battleground\nThe-1-000-000-Glass-Bridge\nReborn as Driller")
+local Section = getgenv().S
+local Sec = getgenv().SS
+local gm = {
+["Reborn As driller"] = 121280127579038,
+["Protect the house"] = 77477180745179,
+["Pyro Playground"] = 17783560582,
+["Fun squid game! glass bridge 2"] = 85532644946801,
+["The $1000000 glass bridge"] = 87854376962069,
+["Prison mining simulator"] = 94886636839149,
+["Golden Clickers"] = 14076010618,
+["Clickers Adventure"] = 92774394395352,
+["Luck! Clickers Adventures!"] = 87557890946310,
+["New Clicker Adventure"] = 116303778461334,
+["Secret Tappers"] = 127613395571937,
+["Mysterious Hatchers"] = 136326314793427,
+["Clicker Legends"] = 79760109249873,
+["Click Game X"] = 124553710181976,
+["Tapping Masters"] = 108202498211862,
+["Mega Hatchers X"] = 101897028138084,
+["Pet hatching simulator reborn"] = 82183747344203,
+["Pet Hatchers X"] = 16168601525,
+["Tapping Gods"] = 95941360258087,
+["Godly Tappers 99"] = 17757552010,
+["Pet Hatching Simulator 99"] = 94640462621211,
+["Ultra pet hatching simulator X"] = 123345140331667
+}
+
+local selectedGame = nil
+
+for gameName, _ in pairs(gm) do Section:CreateLabel(gameName, gameName, function() selectedGame = gameName Label.ChangeText("SelectedGame", "Selected: " .. gameName) end, {holdColor = true}) end
+
+Sec:CreateLabel("SelectedGame", "Selected: None")
+
+Sec:CreateButton("Teleport to Game", function() if selectedGame and gm[selectedGame] then local gameId = gm[selectedGame] game:GetService("TeleportService"):Teleport(gameId, game.Players.LocalPlayer) else Library:CreateNotification("Error", "Please select a game first!", 3) end end)
