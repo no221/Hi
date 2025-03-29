@@ -30,6 +30,6 @@ local selectedGame = nil
 
 for gameName, _ in pairs(gm) do Section:CreateLabel(gameName, gameName, function() selectedGame = gameName Label.ChangeText("Selected: " .. gameName) end, {holdColor = true}) end
 
-Sec:CreateLabel("SelectedGame", "Selected: None")
+Sec:CreateLabel("SelectedGame", "Selected:\nNone")
 
 Sec:CreateButton("Teleport to Game", function() if selectedGame and gm[selectedGame] then local gameId = gm[selectedGame] game:GetService("TeleportService"):Teleport(gameId, game.Players.LocalPlayer) else Library:CreateNotification("Error", "Please select a game first!", 3) end end)
