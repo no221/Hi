@@ -28,7 +28,7 @@ local gm = {
 
 local selectedGame = nil
 
-for gameName, _ in pairs(gm) do Section:CreateLabel(gameName, gameName, function() selectedGame = gameName Label.ChangeText("SelectedGame", "Selected: " .. gameName) end, {holdColor = true}) end
+for gameName, _ in pairs(gm) do Section:CreateLabel(gameName, gameName, function() selectedGame = gameName Label.ChangeText("Selected: " .. gameName) end, {holdColor = true}) end
 
 Sec:CreateLabel("SelectedGame", "Selected: None")
 
